@@ -15,7 +15,7 @@ public class RhythmPlatform : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        halfTransparent = new Color(1, 1, 1, 0.5f);
+        halfTransparent = new Color(1, 1, 1, 0.1f);
     }
 
     void Start()
