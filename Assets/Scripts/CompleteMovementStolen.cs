@@ -47,6 +47,8 @@ public class CompleteMovementStolen : MonoBehaviour
     bool leftWallL;
     bool onWallR;
     bool onWallL;
+    //To push player into wall
+    Vector2 wallForce = new Vector2(2, 0);
 
     [Header("Dash")]
 
@@ -115,6 +117,16 @@ public class CompleteMovementStolen : MonoBehaviour
         else
         {
             myHitBox2D.enabled = true;
+        }
+
+        //Push player into wall
+        if (onWallL)
+        {
+            myRigidbody.AddForce(-wallForce);
+        }
+        else if (onWallR)
+        {
+            myRigidbody.AddForce(wallForce);
         }
     }
 
