@@ -75,7 +75,6 @@ public class CompleteMovementStolen : MonoBehaviour
 
     [Header("Animation")]
 
-    Animator myAnimator;
 
     [Header("Azure Alteration variables")]
 
@@ -92,7 +91,6 @@ public class CompleteMovementStolen : MonoBehaviour
 
         myHitBox2D = transform.GetChild(0).GetComponent<BoxCollider2D>();
         myRigidbody = GetComponent<Rigidbody2D>();
-        myAnimator = GetComponent<Animator>();
     }
 
     void Update()
@@ -188,7 +186,6 @@ public class CompleteMovementStolen : MonoBehaviour
         {
             onGround = true;
             fastFall = false;
-            myAnimator.SetBool("Airborn", false);
         }
         if (onGround && !myRigidbody.IsTouching(contactFilters[1]))
         {
@@ -207,11 +204,9 @@ public class CompleteMovementStolen : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A) != Input.GetKey(KeyCode.D))
         {
-            myAnimator.SetBool("Running", true);
         }
         else
         {
-            myAnimator.SetBool("Running", false);
         }
         // Move left
         if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && myRigidbody.linearVelocityX > -movementSpeedCap)
@@ -269,7 +264,6 @@ public class CompleteMovementStolen : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && onGround && !jumpStart)
         {
             jumpStart = true;
-            myAnimator.SetBool("Jumping", true);
 
             // If on a platform moving down the jump doesn't become shortened
             if (myRigidbody.linearVelocityY < 0)
@@ -292,8 +286,6 @@ public class CompleteMovementStolen : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space) && jumpStart)
         {
             jumpStart = false;
-            myAnimator.SetBool("Airborn", true);
-            myAnimator.SetBool("Jumping", false);
 
 
 
@@ -307,8 +299,6 @@ public class CompleteMovementStolen : MonoBehaviour
         // Not jumping anymore if moving downwards
         if (myRigidbody.linearVelocityY < -0.001f)
         {
-            myAnimator.SetBool("Airborn", true);
-            myAnimator.SetBool("Jumping", false);
             jumpStart = false;
             jumpTime = 0;
         }
@@ -392,7 +382,6 @@ public class CompleteMovementStolen : MonoBehaviour
         if (!dashing && (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)) && numberOfDashes > 0)
         {
             dashing = true;
-            myAnimator.SetBool("Dashing", true);
             onGround = false;
             numberOfDashes -= 1;
 
@@ -468,8 +457,6 @@ public class CompleteMovementStolen : MonoBehaviour
 
         if (dashing && onGround && Input.GetKeyDown(KeyCode.Space))
         {
-            myAnimator.SetBool("DashEnd", true);
-            myAnimator.SetBool("Dashing", false);
             dashing = false;
             dashTime = 0;
         }
@@ -477,8 +464,6 @@ public class CompleteMovementStolen : MonoBehaviour
         // dash timer
         if (dashTime >= dashEnd)
         {
-            myAnimator.SetBool("DashEnd", true);
-            myAnimator.SetBool("Dashing", false);
 
             // decelerate depending on direction moving
             switch (myRigidbody.linearVelocityX)
@@ -501,7 +486,6 @@ public class CompleteMovementStolen : MonoBehaviour
             {
                 dashTime = 0;
                 dashing = false;
-                myAnimator.SetBool("DashEnd", false);
             }
 
             // Smoothness when trying to move after dash
@@ -510,7 +494,6 @@ public class CompleteMovementStolen : MonoBehaviour
             {
                 dashTime = 0;
                 dashing = false;
-                myAnimator.SetBool("DashEnd", false);
             }
         }
     }
