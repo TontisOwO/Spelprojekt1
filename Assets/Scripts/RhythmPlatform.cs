@@ -5,6 +5,8 @@ public class RhythmPlatform : MonoBehaviour
     [SerializeField] private BoxCollider2D collider, trigger;
     private SpriteRenderer spriteRenderer;
 
+    [SerializeField] Vector2 indent = new Vector2(0.15f, 0.15f);
+
     [SerializeField] private float timer, switchFrequency, startOffset;
     [SerializeField] private bool startOff;
     private bool canSwitch;
@@ -20,7 +22,7 @@ public class RhythmPlatform : MonoBehaviour
 
     void Start()
     {
-        trigger.size = collider.size * 0.95f;
+        trigger.size = collider.size - indent / transform.localScale;
         canSwitch = true;
         if (startOff) { collider.enabled = false; }
         if (collider.enabled)
