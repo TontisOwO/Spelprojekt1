@@ -5,7 +5,7 @@ public class RhythmPlatform : MonoBehaviour
     [SerializeField] private BoxCollider2D collider, trigger;
     private SpriteRenderer spriteRenderer;
 
-    [SerializeField] Vector2 indent = new Vector2(0.15f, 0.15f);
+    [SerializeField] Vector2 indent = new Vector2(0.2f, 0.2f);
 
     [SerializeField] private float timer, switchFrequency, startOffset;
     [SerializeField] private bool startOff;
