@@ -775,7 +775,7 @@ MonoBehaviour:
   movementSpeed: 2
   movementSpeedMax: 5
   movementDeceletation: 2
-  jumpForce: 3
+  jumpForce: 5
   jumpReduceMulti: 9.81
 --- !u!1 &770782304
 GameObject:

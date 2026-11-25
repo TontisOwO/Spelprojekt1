@@ -54,13 +54,13 @@ public class MovementScript : MonoBehaviour
         {
             jumpTime += Time.deltaTime;
         }
-        if (Keyboard.current.spaceKey.wasReleasedThisFrame)
+        if (Keyboard.current.spaceKey.wasReleasedThisFrame && jumping)
         {
             jumping = false;
             myRigidbody.linearVelocityY -= jumpForce - jumpTime * myRigidbody.gravityScale * jumpReduceMulti;
             jumpTime = 0;
         }
-        if (jumpForce - jumpTime * myRigidbody.gravityScale * jumpReduceMulti <= 0)
+        if (jumpForce - jumpTime * myRigidbody.gravityScale * 9.81f <= 0)
         {
             jumping = false;
             jumpTime = 0;
