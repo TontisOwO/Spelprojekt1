@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private float BPM;
+    [SerializeField] public float BPM;
     private float beatLength;
     private float timer;
     [SerializeField] private AudioSource audioSource;

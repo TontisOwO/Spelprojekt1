@@ -4,10 +4,13 @@ public class RhythmPlatform : MonoBehaviour
 {
     [SerializeField] private BoxCollider2D collider, trigger;
     private SpriteRenderer spriteRenderer;
+    [SerializeField] private GameManager gameManager;
 
-    [SerializeField] Vector2 indent = new Vector2(0.2f, 0.2f);
+    [SerializeField] private Vector2 indent = new Vector2(0.2f, 0.2f);
 
-    [SerializeField] private float timer, switchFrequency, startOffset;
+    [SerializeField] private float timer, startOffset, BPM;
+    private float realFrequency;
+    [SerializeField] private int Beat = 1;
     [SerializeField] private bool startOff;
     private bool canSwitch;
 
@@ -22,6 +25,7 @@ public class RhythmPlatform : MonoBehaviour
 
     void Start()
     {
+        gameManager = FindFirstObjectByType<GameManager>();
         trigger.size = collider.size - indent / transform.localScale;
         canSwitch = true;
         if (startOff) { collider.enabled = false; }
@@ -33,16 +37,18 @@ public class RhythmPlatform : MonoBehaviour
         {
             spriteRenderer.color = halfTransparent;
         }
-        timer -= startOffset;
+        BPM = gameManager.BPM;
+        realFrequency = 60 * Beat / BPM;
+        timer -= startOffset / BPM;
     }
 
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer > switchFrequency && canSwitch)
+        if (timer > realFrequency && canSwitch)
         {
-            timer -= switchFrequency;
-            collider.enabled = !collider.enabled;
+            timer -= realFrequency;
+            Action();
             if (collider.enabled)
             {
                 spriteRenderer.color = Color.white;
@@ -53,6 +59,12 @@ public class RhythmPlatform : MonoBehaviour
             }
         }
     }
+
+    protected virtual void Action()
+    {
+        collider.enabled = !collider.enabled;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         canSwitch = false;

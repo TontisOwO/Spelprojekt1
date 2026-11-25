@@ -154,10 +154,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RhythmPlatform
   collider: {fileID: 7833480716785256234}
   trigger: {fileID: 3673823315510962549}
-  indent: {x: 0.15, y: 0.15}
+  gameManager: {fileID: 0}
+  indent: {x: 0.25, y: 0.25}
   timer: 0
-  switchFrequency: 0.5
   startOffset: 0
+  BPM: 0
+  Beat: 1
   startOff: 0
 --- !u!61 &3673823315510962549
 BoxCollider2D:

@@ -1,0 +1,16 @@
+using UnityEngine;
+
+public class CameraScript : MonoBehaviour
+{
+    [SerializeField] GameObject player;
+
+    [SerializeField] private float speed;
+    Vector3 position;
+
+    void Update()
+    {
+        position = Vector2.Lerp(player.transform.position, transform.position, Mathf.Pow(0.5f, speed * Time.deltaTime));
+        position.z = -10;
+        transform.position = position;
+    }
+}
