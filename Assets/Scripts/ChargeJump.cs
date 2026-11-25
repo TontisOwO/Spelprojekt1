@@ -16,9 +16,14 @@ public class ChargeJump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.shiftKey.isPressed)
+        if (Keyboard.current.shiftKey.wasReleasedThisFrame)
         {
-            movementScript.canMove = false;
+            movementScript.canMove = true;
         }
+        else if (Keyboard.current.shiftKey.isPressed)
+        {
+
+        }
+
     }
 }
