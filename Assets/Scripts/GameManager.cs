@@ -3,12 +3,17 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] public float BPM;
+    [SerializeField] private float beatsUntilLoop;
     private float beatLength;
     private float timer;
-    [SerializeField] private AudioSource audioSource;
+    private int beats;
+    public float trackStart;
+    [SerializeField] private AudioSource singleBeat;
+    [SerializeField] private AudioSource track;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        track.time = trackStart;
         beatLength = 60 / BPM;
     }
 
@@ -19,7 +24,13 @@ public class GameManager : MonoBehaviour
         if (timer >= beatLength)
         {
             timer -= beatLength;
-            audioSource.Play();
+            //singleBeat.Play();
+            beats++;
+            if (beats == beatsUntilLoop)
+            {
+                track.time = trackStart;
+                beats = 0;
+            }
         }
     }
 }
