@@ -13,7 +13,7 @@ public class MovementScript : MonoBehaviour
 
     [Header("Movement")]
 
-    [SerializeField] bool canMove = true;
+    [SerializeField] public bool canMove;
 
     [SerializeField] private float movementSpeed, movementSpeedMax, movementDeceleration;
 
