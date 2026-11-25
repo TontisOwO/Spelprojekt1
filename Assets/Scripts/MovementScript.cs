@@ -96,7 +96,9 @@ public class MovementScript : MonoBehaviour
             {
                 myRigidbody.linearVelocityX -= movementSpeed * Time.deltaTime;
             }
-            else
+            // VILMER :P
+            //else
+            else if (myRigidbody.linearVelocityX >= -movementSpeedMax - 1)
             {
                 myRigidbody.linearVelocityX = -movementSpeedMax;
             }
@@ -108,7 +110,9 @@ public class MovementScript : MonoBehaviour
             {
                 myRigidbody.linearVelocityX += movementSpeed * Time.deltaTime;
             }
-            else
+            // VILMER :3
+            //else
+            else if (myRigidbody.linearVelocityX <= movementSpeedMax + 1)
             {
                 myRigidbody.linearVelocityX = movementSpeedMax;
             }

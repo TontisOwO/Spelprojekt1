@@ -35,6 +35,7 @@ public class ChargeJump : MonoBehaviour
                 myRigidbody.linearVelocityX = chargeJumpForce * facing;
             }
             slider.value = 0;
+            slider.gameObject.SetActive(false);
         }
         else if (Keyboard.current.shiftKey.isPressed && movementScript.onGround)
         {
