@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,7 +14,7 @@ public class MovementScript : MonoBehaviour
 
     [Header("Movement")]
 
-    [SerializeField] bool canMove;
+    [SerializeField] bool canMove = true;
 
     [SerializeField] private float movementSpeed;
     [SerializeField] private float movementSpeedMax, movementDeceletation;

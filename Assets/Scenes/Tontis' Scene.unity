@@ -785,6 +785,7 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  canMove: 1
   movementSpeed: 6
   movementSpeedMax: 5
   movementDeceletation: 6
