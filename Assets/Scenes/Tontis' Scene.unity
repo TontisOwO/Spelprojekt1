@@ -789,7 +789,7 @@ MonoBehaviour:
   movementSpeedMax: 5
   movementDeceletation: 2
   jumpForce: 8
-  jumpReduceMulti: 9.81
+  jumpReduceMulti: 1
 --- !u!1 &770782304
 GameObject:
   m_ObjectHideFlags: 0

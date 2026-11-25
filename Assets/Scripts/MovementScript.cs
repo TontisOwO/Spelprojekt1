@@ -18,7 +18,7 @@ public class MovementScript : MonoBehaviour
 
     [Header("Jumping")]
 
-    [SerializeField] float jumpForce, jumpReduceMulti = 9.81f;
+    [SerializeField] float jumpForce, jumpReduceMulti;
     float jumpTime;
     bool jumping;
 
@@ -62,10 +62,10 @@ public class MovementScript : MonoBehaviour
         if (Keyboard.current.spaceKey.wasReleasedThisFrame && jumping)
         {
             jumping = false;
-            myRigidbody.linearVelocityY -= jumpForce - jumpTime * myRigidbody.gravityScale * jumpReduceMulti;
+            myRigidbody.linearVelocityY -= jumpForce - jumpTime * myRigidbody.gravityScale * (9.81f / jumpReduceMulti);
             jumpTime = 0;
         }
-        if (jumpForce - jumpTime * myRigidbody.gravityScale * jumpReduceMulti <= 0)
+        if (jumpForce - jumpTime * myRigidbody.gravityScale * (9.81f / jumpReduceMulti) <= 0)
         {
             jumping = false;
             jumpTime = 0;
