@@ -13,14 +13,14 @@ public class MovementScript : MonoBehaviour
 
     [Header("Movement")]
 
-    [SerializeField] public bool canMove;
+    public bool canMove;
 
-    [SerializeField] private float movementSpeed;
-    [SerializeField] private float movementSpeedMax, movementDeceletation;
+    [SerializeField] private float movementSpeed, movementSpeedMax, movementDeceleration;
 
     [Header("Jumping")]
 
-    [SerializeField] float jumpForce, jumpReduceMulti;
+    [SerializeField] float jumpForce;
+    [SerializeField] float jumpReduceMulti, jumpReduceBase;
     float jumpTime;
     bool jumping;
 
@@ -85,16 +85,16 @@ public class MovementScript : MonoBehaviour
             }
         }
 
-        if (!(Keyboard.current.aKey.isPressed || Keyboard.current.dKey.isPressed))
+        if (!(Keyboard.current.aKey.isPressed || Keyboard.current.dKey.isPressed) || (Keyboard.current.aKey.isPressed && Keyboard.current.dKey.isPressed))
         {
-            if (myRigidbody.linearVelocityX > 0 + movementDeceletation * Time.deltaTime)
+            if (myRigidbody.linearVelocityX > 0 + movementDeceleration * Time.deltaTime)
             {
-                myRigidbody.linearVelocityX -= movementDeceletation * Time.deltaTime;
+                myRigidbody.linearVelocityX -= movementDeceleration * Time.deltaTime;
 
             }
-            else if (myRigidbody.linearVelocityX < 0 - movementDeceletation * Time.deltaTime)
+            else if (myRigidbody.linearVelocityX < 0 - movementDeceleration * Time.deltaTime)
             {
-                myRigidbody.linearVelocityX += movementDeceletation * Time.deltaTime;
+                myRigidbody.linearVelocityX += movementDeceleration * Time.deltaTime;
 
             }
             else
@@ -103,23 +103,23 @@ public class MovementScript : MonoBehaviour
             }
         }
 
-        if (Keyboard.current.aKey.isPressed && Keyboard.current.dKey.isPressed)
-        {
-            if (myRigidbody.linearVelocityX > 0 + movementSpeed * Time.deltaTime)
-            {
-                myRigidbody.linearVelocityX -= movementSpeed * Time.deltaTime;
+        //if (Keyboard.current.aKey.isPressed && Keyboard.current.dKey.isPressed)
+        //{
+        //    if (myRigidbody.linearVelocityX > 0 + movementSpeed * Time.deltaTime)
+        //    {
+        //        myRigidbody.linearVelocityX -= movementSpeed * Time.deltaTime;
 
-            }
-            else if (myRigidbody.linearVelocityX < 0 - movementSpeed * Time.deltaTime)
-            {
-                myRigidbody.linearVelocityX += movementSpeed * Time.deltaTime;
+        //    }
+        //    else if (myRigidbody.linearVelocityX < 0 - movementSpeed * Time.deltaTime)
+        //    {
+        //        myRigidbody.linearVelocityX += movementSpeed * Time.deltaTime;
 
-            }
-            else
-            {
-                myRigidbody.linearVelocityX = 0;
-            }
-        }
+        //    }
+        //    else
+        //    {
+        //        myRigidbody.linearVelocityX = 0;
+        //    }
+        //}
     }
     private void JumpHandling() 
     {
