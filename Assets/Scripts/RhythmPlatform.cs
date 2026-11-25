@@ -10,7 +10,8 @@ public class RhythmPlatform : MonoBehaviour
 
     [SerializeField] private float timer, startOffset, BPM;
     private float realFrequency;
-    [SerializeField] private int Beat = 1;
+    [SerializeField] private int Beat = 1, beatsOn = 1, beatsOff = 1;
+    private int beatCounter;
     [SerializeField] private bool startOff;
     private bool canSwitch;
 
@@ -45,9 +46,14 @@ public class RhythmPlatform : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer > realFrequency && canSwitch)
+        while (timer > realFrequency && canSwitch)
         {
             timer -= realFrequency;
+            beatCounter++;
+            if ((collider.enabled && beatCounter == beatsOn) ||(!collider.enabled && beatCounter == beatsOff))
+            {
+                beatCounter = 0;
+            }
             Action();
             if (collider.enabled)
             {

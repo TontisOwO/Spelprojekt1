@@ -9,7 +9,7 @@ public class MovementScript : MonoBehaviour
 
     [SerializeField] ContactFilter2D[] contactFilters = new ContactFilter2D[4];
 
-    private bool onGround, onLeftWall, onRightWall;
+    public bool onGround, onLeftWall, onRightWall;
 
     [Header("Movement")]
 
@@ -85,7 +85,7 @@ public class MovementScript : MonoBehaviour
             }
         }
 
-        if (!(Keyboard.current.aKey.isPressed || Keyboard.current.dKey.isPressed) || (Keyboard.current.aKey.isPressed && Keyboard.current.dKey.isPressed))
+        if ((Keyboard.current.aKey.isPressed && Keyboard.current.dKey.isPressed) || !(Keyboard.current.aKey.isPressed || Keyboard.current.dKey.isPressed))
         {
             if (myRigidbody.linearVelocityX > 0 + movementDeceleration * Time.deltaTime)
             {
@@ -140,7 +140,7 @@ public class MovementScript : MonoBehaviour
             myRigidbody.linearVelocityY -= jumpForce - jumpTime * myRigidbody.gravityScale * (9.81f / jumpReduceMulti);
             jumpTime = 0;
         }
-        if (jumpReduceMulti > 1 && myRigidbody.linearVelocityY <= 0)
+        if ((jumpReduceMulti > 1 || jumpReduceBase != 0) && myRigidbody.linearVelocityY <= 0)
         {
             jumping = false;
             jumpTime = 0;
