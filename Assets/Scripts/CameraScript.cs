@@ -7,7 +7,7 @@ public class CameraScript : MonoBehaviour
     [SerializeField] private float speed;
     Vector3 position;
 
-    void Update()
+    void FixedUpdate()
     {
         position = Vector2.Lerp(player.transform.position, transform.position, Mathf.Pow(0.5f, speed * Time.deltaTime));
         position.z = -10;
