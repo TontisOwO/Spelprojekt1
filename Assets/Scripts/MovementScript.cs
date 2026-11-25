@@ -13,6 +13,8 @@ public class MovementScript : MonoBehaviour
 
     [Header("Movement")]
 
+    [SerializeField] bool canMove;
+
     [SerializeField] private float movementSpeed;
     [SerializeField] private float movementSpeedMax, movementDeceletation;
 
@@ -45,31 +47,16 @@ public class MovementScript : MonoBehaviour
             jumping = false;
             jumpTime = 0;
         }
+        if (canMove)
+        {
+            MovementHandling();
+        }
+    }
 
+    private void MovementHandling()
+    {
         WASDHandling();
-
-        if (Keyboard.current.spaceKey.isPressed && onGround)
-        {
-            myRigidbody.linearVelocityY = 0;
-            myRigidbody.linearVelocityY += jumpForce;
-            onGround = false;
-            jumping = true;
-        }
-        if (jumping)
-        {
-            jumpTime += Time.deltaTime;
-        }
-        if (Keyboard.current.spaceKey.wasReleasedThisFrame && jumping)
-        {
-            jumping = false;
-            myRigidbody.linearVelocityY -= jumpForce - jumpTime * myRigidbody.gravityScale * (9.81f / jumpReduceMulti);
-            jumpTime = 0;
-        }
-        if (jumpForce - jumpTime * myRigidbody.gravityScale * (9.81f / jumpReduceMulti) <= 0)
-        {
-            jumping = false;
-            jumpTime = 0;
-        }
+        JumpHandling();
     }
 
     private void WASDHandling()
@@ -132,6 +119,36 @@ public class MovementScript : MonoBehaviour
             {
                 myRigidbody.linearVelocityX = 0;
             }
+        }
+    }
+    private void JumpHandling() 
+    {
+        if (Keyboard.current.spaceKey.isPressed && onGround)
+        {
+            myRigidbody.linearVelocityY = 0;
+            myRigidbody.linearVelocityY += jumpForce;
+            onGround = false;
+            jumping = true;
+        }
+        if (jumping)
+        {
+            jumpTime += Time.deltaTime;
+        }
+        if (Keyboard.current.spaceKey.wasReleasedThisFrame && jumping)
+        {
+            jumping = false;
+            myRigidbody.linearVelocityY -= jumpForce - jumpTime * myRigidbody.gravityScale * (9.81f / jumpReduceMulti);
+            jumpTime = 0;
+        }
+        if (jumpReduceMulti > 1 && myRigidbody.linearVelocityY <= 0)
+        {
+            jumping = false;
+            jumpTime = 0;
+        }
+        if (jumpForce - jumpTime * myRigidbody.gravityScale * (9.81f / jumpReduceMulti) <= 0)
+        {
+            jumping = false;
+            jumpTime = 0;
         }
     }
 }

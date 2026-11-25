@@ -787,7 +787,7 @@ MonoBehaviour:
     maxNormalAngle: 0
   movementSpeed: 6
   movementSpeedMax: 5
-  movementDeceletation: 2
+  movementDeceletation: 6
   jumpForce: 8
   jumpReduceMulti: 1
 --- !u!1 &770782304

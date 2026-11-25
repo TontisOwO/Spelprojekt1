@@ -9,7 +9,7 @@ public class CameraScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        position = Vector2.Lerp(player.transform.position, transform.position, Mathf.Pow(0.5f, speed * Time.deltaTime));
+        position = Vector2.Lerp(player.transform.position, transform.position, Mathf.Pow(0.5f, speed * 1f/30));
         position.z = -10;
         transform.position = position;
     }
