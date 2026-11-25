@@ -7,7 +7,7 @@ public class MovementScript : MonoBehaviour
 
     [Header("Collision")]
 
-    [SerializeField] ContactFilter2D[] contactFilters = new ContactFilter2D[3];
+    [SerializeField] ContactFilter2D[] contactFilters = new ContactFilter2D[4];
 
     private bool onGround, onLeftWall, onRightWall;
 
@@ -26,7 +26,7 @@ public class MovementScript : MonoBehaviour
 
     private void Awake()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             contactFilters[i].SetNormalAngle(90 * i - 45, 90 * i + 45);
             contactFilters[i].SetLayerMask(LayerMask.GetMask("Ground"));
@@ -40,6 +40,11 @@ public class MovementScript : MonoBehaviour
         onGround = myRigidbody.IsTouching(contactFilters[1]);
         onLeftWall = myRigidbody.IsTouching(contactFilters[0]);
         onRightWall = myRigidbody.IsTouching(contactFilters[2]);
+        if (myRigidbody.IsTouching(contactFilters[3]))
+        {
+            jumping = false;
+            jumpTime = 0;
+        }
 
         WASDHandling();
 
@@ -60,7 +65,7 @@ public class MovementScript : MonoBehaviour
             myRigidbody.linearVelocityY -= jumpForce - jumpTime * myRigidbody.gravityScale * jumpReduceMulti;
             jumpTime = 0;
         }
-        if (jumpForce - jumpTime * myRigidbody.gravityScale * 9.81f <= 0)
+        if (jumpForce - jumpTime * myRigidbody.gravityScale * jumpReduceMulti <= 0)
         {
             jumping = false;
             jumpTime = 0;
