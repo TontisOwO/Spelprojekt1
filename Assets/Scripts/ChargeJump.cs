@@ -20,7 +20,7 @@ public class ChargeJump : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        sliderIncrement = (60 / gameManager.BPM) * Time.deltaTime;
+        sliderIncrement = (60 / gameManager.BPM) * Time.fixedDeltaTime;
     }
 
     // Update is called once per frame
@@ -61,6 +61,7 @@ public class ChargeJump : MonoBehaviour
         if (!movementScript.onGround)
         {
             slider.gameObject.SetActive(false);
+            slider.value = 0;
         }
     }
 }
