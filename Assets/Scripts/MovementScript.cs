@@ -17,7 +17,7 @@ public class MovementScript : MonoBehaviour
 
     public bool canMove;
 
-    [SerializeField] private float movementSpeed, movementSpeedMax, movementDeceleration;
+    [SerializeField] private float movementSpeed = 20, movementSpeedMax = 5, movementDeceleration = 40;
 
     [Header("Jumping")]
 
@@ -28,8 +28,8 @@ public class MovementScript : MonoBehaviour
 
     [Header("WallJumping")]
 
-    [SerializeField] float wallJumpForceX;
-    [SerializeField] float wallJumpForceY;
+    [SerializeField] float wallJumpForceX = 6;
+    [SerializeField] float wallJumpForceY = 6;
 
     private void Awake()
     {
@@ -102,7 +102,7 @@ public class MovementScript : MonoBehaviour
             }
             // VILMER :P
             //else
-            else if (myRigidbody.linearVelocityX >= -movementSpeedMax - 1)
+            else if (myRigidbody.linearVelocityX >= -movementSpeedMax - 0.99f)
             {
                 myRigidbody.linearVelocityX = -movementSpeedMax;
             }
@@ -116,12 +116,12 @@ public class MovementScript : MonoBehaviour
             }
             // VILMER :3
             //else
-            else if (myRigidbody.linearVelocityX <= movementSpeedMax + 1)
+            else if (myRigidbody.linearVelocityX <= movementSpeedMax + 0.99f)
             {
                 myRigidbody.linearVelocityX = movementSpeedMax;
             }
         }
-        //VILMER :D
+        // VILMER :D
         if (myRigidbody.linearVelocityX < 0)
         {
             chargeJump.eyes.transform.position = new Vector2(transform.position.x - 0.4f, transform.position.y);
