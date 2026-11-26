@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
     void FixedUpdate()
     {
         timer += Time.fixedDeltaTime;
-        Debug.Log(timer);
         if (timer >= beatLength)
         {
             timer -= beatLength;
