@@ -792,9 +792,9 @@ MonoBehaviour:
   onLeftWall: 0
   onRightWall: 0
   canMove: 1
-  movementSpeed: 8
+  movementSpeed: 20
   movementSpeedMax: 6
-  movementDeceleration: 8
+  movementDeceleration: 40
   jumpForce: 10
   jumpReduceMulti: 1
   jumpReduceBase: 0
@@ -1739,6 +1739,10 @@ PrefabInstance:
     - target: {fileID: 7230928624543333417, guid: dc167bc4416dcd448aaac3683f1ccfa1, type: 3}
       propertyPath: m_Name
       value: OneWayPlatform
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230928624543333417, guid: dc167bc4416dcd448aaac3683f1ccfa1, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
