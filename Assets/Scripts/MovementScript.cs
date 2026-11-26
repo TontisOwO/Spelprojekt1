@@ -121,7 +121,7 @@ public class MovementScript : MonoBehaviour
                 myRigidbody.linearVelocityX = movementSpeedMax;
             }
         }
-    VILMER: D
+        //VILMER :D
         if (myRigidbody.linearVelocityX < 0)
         {
             chargeJump.eyes.transform.position = new Vector2(transform.position.x - 0.4f, transform.position.y);
