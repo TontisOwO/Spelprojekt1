@@ -57,6 +57,7 @@ public class MovementScript : MonoBehaviour
     {
         WASDHandling();
         JumpHandling();
+        WallJump();
     }
 
     private void WASDHandling()
@@ -149,6 +150,21 @@ public class MovementScript : MonoBehaviour
         {
             jumping = false;
             jumpTime = 0;
+        }
+    }
+
+    private void WallJump()
+    {
+        if (Keyboard.current.spaceKey.isPressed && !onGround)
+        {
+            if (onLeftWall)
+            {
+
+            }
+            if (onRightWall)
+            {
+
+            }
         }
     }
 }

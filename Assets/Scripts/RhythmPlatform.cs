@@ -53,8 +53,8 @@ public class RhythmPlatform : MonoBehaviour
             if ((collider.enabled && beatCounter == beatsOn) ||(!collider.enabled && beatCounter == beatsOff))
             {
                 beatCounter = 0;
+                Action();
             }
-            Action();
             if (collider.enabled)
             {
                 spriteRenderer.color = Color.white;
