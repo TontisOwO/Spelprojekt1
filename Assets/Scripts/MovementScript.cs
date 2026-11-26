@@ -30,6 +30,7 @@ public class MovementScript : MonoBehaviour
 
     [SerializeField] float wallJumpForceX = 6;
     [SerializeField] float wallJumpForceY = 6;
+    [SerializeField] bool leaveLeftWall, leaveRightWall;
 
     private void Awake()
     {
@@ -47,12 +48,15 @@ public class MovementScript : MonoBehaviour
 
     void Update()
     {
-        // VILMER :)
-        if (!onGround && myRigidbody.IsTouching(contactFilters[1]) && !((Keyboard.current.aKey.isPressed && !Keyboard.current.dKey.isPressed && myRigidbody.linearVelocityX < 0) || (Keyboard.current.dKey.isPressed && !Keyboard.current.aKey.isPressed && myRigidbody.linearVelocityX > 0)))
+        if (!onGround && myRigidbody.IsTouching(contactFilters[1]))
         {
-            myRigidbody.linearVelocityX = 0;
+            if (!((Keyboard.current.aKey.isPressed && !Keyboard.current.dKey.isPressed && myRigidbody.linearVelocityX < 0) || (Keyboard.current.dKey.isPressed && !Keyboard.current.aKey.isPressed && myRigidbody.linearVelocityX > 0)))
+            {
+                myRigidbody.linearVelocityX = 0;
+            }
+            leaveLeftWall = false;
+            leaveRightWall = false;
         }
-        //
         onGround = myRigidbody.IsTouching(contactFilters[1]);
         onLeftWall = myRigidbody.IsTouching(contactFilters[0]);
         onRightWall = myRigidbody.IsTouching(contactFilters[2]);
@@ -61,6 +65,15 @@ public class MovementScript : MonoBehaviour
             jumping = false;
             jumpTime = 0;
         }
+        if (onLeftWall)
+        {
+            leaveRightWall = false;
+        }
+        if (onRightWall)
+        {
+            leaveLeftWall = false;
+        }
+
         if (canMove)
         {
             MovementHandling();
@@ -102,7 +115,7 @@ public class MovementScript : MonoBehaviour
             }
             // VILMER :P
             //else
-            else if (myRigidbody.linearVelocityX >= -movementSpeedMax - 0.99f)
+            else if (myRigidbody.linearVelocityX >= -movementSpeedMax - 1 && !leaveRightWall)
             {
                 myRigidbody.linearVelocityX = -movementSpeedMax;
             }
@@ -116,7 +129,7 @@ public class MovementScript : MonoBehaviour
             }
             // VILMER :3
             //else
-            else if (myRigidbody.linearVelocityX <= movementSpeedMax + 0.99f)
+            else if (myRigidbody.linearVelocityX <= movementSpeedMax + 1 && !leaveLeftWall)
             {
                 myRigidbody.linearVelocityX = movementSpeedMax;
             }
@@ -187,11 +200,13 @@ public class MovementScript : MonoBehaviour
             {
                 myRigidbody.linearVelocityY = wallJumpForceY;
                 myRigidbody.linearVelocityX = wallJumpForceX;
+                leaveLeftWall = true;
             }
             if (onRightWall)
             {
                 myRigidbody.linearVelocityY = wallJumpForceY;
                 myRigidbody.linearVelocityX = -wallJumpForceX;
+                leaveRightWall = true;
             }
         }
     }

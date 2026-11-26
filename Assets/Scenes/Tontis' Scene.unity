@@ -793,13 +793,13 @@ MonoBehaviour:
   onRightWall: 0
   canMove: 1
   movementSpeed: 20
-  movementSpeedMax: 6
+  movementSpeedMax: 5
   movementDeceleration: 40
   jumpForce: 10
   jumpReduceMulti: 1
   jumpReduceBase: 0
-  wallJumpForceX: 8
-  wallJumpForceY: 8
+  wallJumpForceX: 6
+  wallJumpForceY: 6
 --- !u!1 &770782304
 GameObject:
   m_ObjectHideFlags: 0
