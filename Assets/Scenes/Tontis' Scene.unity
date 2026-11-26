@@ -1745,6 +1745,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5347873828868256452, guid: dc167bc4416dcd448aaac3683f1ccfa1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5347873828868256452, guid: dc167bc4416dcd448aaac3683f1ccfa1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.92
       objectReference: {fileID: 0}
@@ -1825,7 +1829,7 @@ Transform:
   m_GameObject: {fileID: 8805436516966710636}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.92, y: -1.57, z: 0}
+  m_LocalPosition: {x: -8.68, y: -1.67, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1974,7 +1978,7 @@ GameObject:
   - component: {fileID: 8805436516966710638}
   - component: {fileID: 8805436516966710637}
   m_Layer: 3
-  m_Name: OneWayPlatform (1)
+  m_Name: OneWayRhythmPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

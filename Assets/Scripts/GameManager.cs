@@ -22,13 +22,13 @@ public class GameManager : MonoBehaviour
     void FixedUpdate()
     {
         timer += Time.fixedDeltaTime;
-        //Debug.Log(timer);
+        Debug.Log(timer);
         if (timer >= beatLength)
         {
             timer -= beatLength;
             //singleBeat.Play();
             beats++;
-            //Debug.Log(beats);
+            Debug.Log(beats);
             if (beats == beatsUntilLoop)
             {
                 track.time = trackStart;
