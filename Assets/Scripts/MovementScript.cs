@@ -53,6 +53,7 @@ public class MovementScript : MonoBehaviour
             if (!((Keyboard.current.aKey.isPressed && !Keyboard.current.dKey.isPressed && myRigidbody.linearVelocityX < 0) || (Keyboard.current.dKey.isPressed && !Keyboard.current.aKey.isPressed && myRigidbody.linearVelocityX > 0)))
             {
                 myRigidbody.linearVelocityX = 0;
+                Debug.Log("thing");
             }
             leaveLeftWall = false;
             leaveRightWall = false;
