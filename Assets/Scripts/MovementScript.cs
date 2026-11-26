@@ -166,7 +166,7 @@ public class MovementScript : MonoBehaviour
     }
     private void JumpHandling() 
     {
-        if (Keyboard.current.spaceKey.isPressed && onGround)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && onGround)
         {
             myRigidbody.linearVelocityY = jumpForce;
             jumping = true;
