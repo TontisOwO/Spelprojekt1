@@ -16,7 +16,7 @@ public class ChargeJump : MonoBehaviour
 
     //Remove when proper sprites are implemented
     [SerializeField] public GameObject eyes;
-    //
+    //  
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

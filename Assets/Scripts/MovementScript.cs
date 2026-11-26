@@ -53,6 +53,7 @@ public class MovementScript : MonoBehaviour
             if (!((Keyboard.current.aKey.isPressed && !Keyboard.current.dKey.isPressed && myRigidbody.linearVelocityX < 0) || (Keyboard.current.dKey.isPressed && !Keyboard.current.aKey.isPressed && myRigidbody.linearVelocityX > 0)))
             {
                 myRigidbody.linearVelocityX = 0;
+                Debug.Log("thing");
             }
             leaveLeftWall = false;
             leaveRightWall = false;
@@ -165,7 +166,7 @@ public class MovementScript : MonoBehaviour
     }
     private void JumpHandling() 
     {
-        if (Keyboard.current.spaceKey.isPressed && onGround)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && onGround)
         {
             myRigidbody.linearVelocityY = jumpForce;
             jumping = true;
