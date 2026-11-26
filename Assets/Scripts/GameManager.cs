@@ -27,7 +27,6 @@ public class GameManager : MonoBehaviour
             timer -= beatLength;
             //singleBeat.Play();
             beats++;
-            Debug.Log(beats);
             if (beats == beatsUntilLoop)
             {
                 track.time = trackStart;
