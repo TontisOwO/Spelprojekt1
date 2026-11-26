@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Vilmion's Scene.unity
+    guid: d671323aea2de1f4fa5e864200dc3b2d
+  - enabled: 0
     path: Assets/Scenes/Tontis' Scene.unity
     guid: d8ce551d4ba155b4f858ba8570c488ce
   - enabled: 0

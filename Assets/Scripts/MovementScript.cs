@@ -4,7 +4,9 @@ using UnityEngine.InputSystem;
 public class MovementScript : MonoBehaviour
 {
     Rigidbody2D myRigidbody;
-
+    // VILMER :S
+    ChargeJump chargeJump;
+    //
     [Header("Collision")]
 
     [SerializeField] ContactFilter2D[] contactFilters = new ContactFilter2D[4];
@@ -35,10 +37,19 @@ public class MovementScript : MonoBehaviour
             contactFilters[i].useTriggers = false;
         }
         myRigidbody = GetComponent<Rigidbody2D>();
+        // VILMER :}
+        chargeJump = GetComponent<ChargeJump>();
+        //
     }
 
     void Update()
     {
+        // VILMER :)
+        if (!onGround && myRigidbody.IsTouching(contactFilters[1]) && !((Keyboard.current.aKey.isPressed && !Keyboard.current.dKey.isPressed && myRigidbody.linearVelocityX < 0) || (Keyboard.current.dKey.isPressed && !Keyboard.current.aKey.isPressed && myRigidbody.linearVelocityX > 0)))
+        {
+            myRigidbody.linearVelocityX = 0;
+        }
+        //
         onGround = myRigidbody.IsTouching(contactFilters[1]);
         onLeftWall = myRigidbody.IsTouching(contactFilters[0]);
         onRightWall = myRigidbody.IsTouching(contactFilters[2]);
@@ -51,6 +62,24 @@ public class MovementScript : MonoBehaviour
         {
             MovementHandling();
         }
+        // VILMER :U
+        // This is mostly a copy of the deceleration code, but I didn't want to mess with your script too much so I'll leave making it into a proper function to you.
+        else if (onGround)
+        {
+            if (myRigidbody.linearVelocityX > 0 + movementDeceleration * Time.deltaTime)
+            {
+                myRigidbody.linearVelocityX -= movementDeceleration * Time.deltaTime;
+            }
+            else if (myRigidbody.linearVelocityX < 0 - movementDeceleration * Time.deltaTime)
+            {
+                myRigidbody.linearVelocityX += movementDeceleration * Time.deltaTime;
+            }
+            else
+            {
+                myRigidbody.linearVelocityX = 0;
+            }
+        }
+        //
     }
 
     private void MovementHandling()
@@ -68,7 +97,9 @@ public class MovementScript : MonoBehaviour
             {
                 myRigidbody.linearVelocityX -= movementSpeed * Time.deltaTime;
             }
-            else
+            // VILMER :P
+            //else
+            else if (myRigidbody.linearVelocityX >= -movementSpeedMax - 1)
             {
                 myRigidbody.linearVelocityX = -movementSpeedMax;
             }
@@ -80,23 +111,37 @@ public class MovementScript : MonoBehaviour
             {
                 myRigidbody.linearVelocityX += movementSpeed * Time.deltaTime;
             }
-            else
+            // VILMER :3
+            //else
+            else if (myRigidbody.linearVelocityX <= movementSpeedMax + 1)
             {
                 myRigidbody.linearVelocityX = movementSpeedMax;
             }
         }
-
-        if ((Keyboard.current.aKey.isPressed && Keyboard.current.dKey.isPressed) || !(Keyboard.current.aKey.isPressed || Keyboard.current.dKey.isPressed))
+        // VILMER :D
+        if (myRigidbody.linearVelocityX < 0)
+        {
+            chargeJump.eyes.transform.position = new Vector2(transform.position.x - 0.4f, transform.position.y);
+        }
+        else if (myRigidbody.linearVelocityX > 0)
+        {
+            chargeJump.eyes.transform.position = new Vector2(transform.position.x + 0.4f, transform.position.y);
+        }
+        else
+        {
+            chargeJump.eyes.transform.position = transform.position;
+        }
+        //if ((Keyboard.current.aKey.isPressed && Keyboard.current.dKey.isPressed) || !(Keyboard.current.aKey.isPressed || Keyboard.current.dKey.isPressed))
+        if (onGround && !Keyboard.current.aKey.isPressed && !Keyboard.current.dKey.isPressed)
+        //
         {
             if (myRigidbody.linearVelocityX > 0 + movementDeceleration * Time.deltaTime)
             {
                 myRigidbody.linearVelocityX -= movementDeceleration * Time.deltaTime;
-
             }
             else if (myRigidbody.linearVelocityX < 0 - movementDeceleration * Time.deltaTime)
             {
                 myRigidbody.linearVelocityX += movementDeceleration * Time.deltaTime;
-
             }
             else
             {
@@ -128,7 +173,8 @@ public class MovementScript : MonoBehaviour
         {
             myRigidbody.linearVelocityY = 0;
             myRigidbody.linearVelocityY += jumpForce;
-            onGround = false;
+            // VILMER :O
+            //onGround = false;
             jumping = true;
         }
         if (jumping)
