@@ -18,7 +18,7 @@ public class RhythmPlatform : MonoBehaviour
     Color halfTransparent;
 
     [SerializeField] bool oneWay;
-    bool entered;
+    //bool entered;
 
     private void Awake()
     {
@@ -70,25 +70,25 @@ public class RhythmPlatform : MonoBehaviour
 
     protected virtual void Action()
     {
-        if (oneWay)
-        {
-            if (!collider.enabled)
-            {
-                canSwitch = true;
-            }
-            if (entered)
-            {
-                canSwitch = false;
-            }
-        }
+        //if (oneWay)
+        //{
+        //    if (!collider.enabled)
+        //    {
+        //        canSwitch = true;
+        //    }
+        //    if (entered)
+        //    {
+        //        canSwitch = false;
+        //    }
+        //}
         collider.enabled = !collider.enabled;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (oneWay && collider.enabled)
+        if (oneWay /*&& collider.enabled*/)
         {
-            entered = true;
+            //entered = true;
             return;
         }
         canSwitch = false;
@@ -96,6 +96,6 @@ public class RhythmPlatform : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         canSwitch = true;
-        entered = false;
+        //entered = false;
     }
 }
