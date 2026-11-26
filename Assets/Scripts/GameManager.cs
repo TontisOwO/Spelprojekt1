@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
         track.Play();
         track.time = trackStart;
         beatLength = 60 / BPM;
-        timer += Time.deltaTime;
     }
 
     // Update is called once per frame
