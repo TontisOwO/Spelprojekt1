@@ -150,7 +150,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   BPM: 120
-  audioSource: {fileID: 91282189}
+  beatsUntilLoop: 0
+  trackStart: 0
+  singleBeat: {fileID: 0}
+  track: {fileID: 0}
 --- !u!4 &91282188
 Transform:
   m_ObjectHideFlags: 0
@@ -795,6 +798,8 @@ MonoBehaviour:
   jumpForce: 10
   jumpReduceMulti: 1
   jumpReduceBase: 0
+  wallJumpForceX: 5
+  wallJumpForceY: 5
 --- !u!1 &770782304
 GameObject:
   m_ObjectHideFlags: 0

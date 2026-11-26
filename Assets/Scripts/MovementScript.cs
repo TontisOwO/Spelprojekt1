@@ -26,7 +26,10 @@ public class MovementScript : MonoBehaviour
     float jumpTime;
     bool jumping;
 
-    //[Header("WallJumping")]
+    [Header("WallJumping")]
+
+    [SerializeField] float wallJumpForceX;
+    [SerializeField] float wallJumpForceY;
 
     private void Awake()
     {
@@ -119,18 +122,18 @@ public class MovementScript : MonoBehaviour
             }
         }
         // VILMER :D
-        if (myRigidbody.linearVelocityX < 0)
-        {
-            chargeJump.eyes.transform.position = new Vector2(transform.position.x - 0.4f, transform.position.y);
-        }
-        else if (myRigidbody.linearVelocityX > 0)
-        {
-            chargeJump.eyes.transform.position = new Vector2(transform.position.x + 0.4f, transform.position.y);
-        }
-        else
-        {
-            chargeJump.eyes.transform.position = transform.position;
-        }
+        //if (myRigidbody.linearVelocityX < 0)
+        //{
+        //    chargeJump.eyes.transform.position = new Vector2(transform.position.x - 0.4f, transform.position.y);
+        //}
+        //else if (myRigidbody.linearVelocityX > 0)
+        //{
+        //    chargeJump.eyes.transform.position = new Vector2(transform.position.x + 0.4f, transform.position.y);
+        //}
+        //else
+        //{
+        //    chargeJump.eyes.transform.position = transform.position;
+        //}
         if (onGround && (Keyboard.current.aKey.isPressed == Keyboard.current.dKey.isPressed))
         {
             if (myRigidbody.linearVelocityX > 0 + movementDeceleration * Time.deltaTime)
@@ -151,8 +154,7 @@ public class MovementScript : MonoBehaviour
     {
         if (Keyboard.current.spaceKey.isPressed && onGround)
         {
-            myRigidbody.linearVelocityY = 0;
-            myRigidbody.linearVelocityY += jumpForce;
+            myRigidbody.linearVelocityY = jumpForce;
             jumping = true;
         }
         if (jumping)
@@ -179,15 +181,17 @@ public class MovementScript : MonoBehaviour
 
     private void WallJump()
     {
-        if (Keyboard.current.spaceKey.isPressed && !onGround)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && !onGround)
         {
             if (onLeftWall)
             {
-
+                myRigidbody.linearVelocityY = wallJumpForceY;
+                myRigidbody.linearVelocityX = wallJumpForceX;
             }
             if (onRightWall)
             {
-
+                myRigidbody.linearVelocityY = wallJumpForceY;
+                myRigidbody.linearVelocityX = -wallJumpForceX;
             }
         }
     }
