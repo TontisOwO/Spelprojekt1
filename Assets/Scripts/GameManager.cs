@@ -13,21 +13,22 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        track.Play();
         track.time = trackStart;
+        track.Play();
         beatLength = 60 / BPM;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        timer += Time.deltaTime;
+        timer += Time.fixedDeltaTime;
+        Debug.Log(timer);
         if (timer >= beatLength)
         {
-            Debug.Log(beats);
             timer -= beatLength;
             //singleBeat.Play();
             beats++;
+            Debug.Log(beats);
             if (beats == beatsUntilLoop)
             {
                 track.time = trackStart;
