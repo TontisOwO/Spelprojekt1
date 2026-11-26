@@ -131,9 +131,7 @@ public class MovementScript : MonoBehaviour
         {
             chargeJump.eyes.transform.position = transform.position;
         }
-        //if ((Keyboard.current.aKey.isPressed && Keyboard.current.dKey.isPressed) || !(Keyboard.current.aKey.isPressed || Keyboard.current.dKey.isPressed))
-        if (onGround && !Keyboard.current.aKey.isPressed && !Keyboard.current.dKey.isPressed)
-        //
+        if (onGround && (Keyboard.current.aKey.isPressed == Keyboard.current.dKey.isPressed))
         {
             if (myRigidbody.linearVelocityX > 0 + movementDeceleration * Time.deltaTime)
             {
@@ -148,24 +146,6 @@ public class MovementScript : MonoBehaviour
                 myRigidbody.linearVelocityX = 0;
             }
         }
-
-        //if (Keyboard.current.aKey.isPressed && Keyboard.current.dKey.isPressed)
-        //{
-        //    if (myRigidbody.linearVelocityX > 0 + movementSpeed * Time.deltaTime)
-        //    {
-        //        myRigidbody.linearVelocityX -= movementSpeed * Time.deltaTime;
-
-        //    }
-        //    else if (myRigidbody.linearVelocityX < 0 - movementSpeed * Time.deltaTime)
-        //    {
-        //        myRigidbody.linearVelocityX += movementSpeed * Time.deltaTime;
-
-        //    }
-        //    else
-        //    {
-        //        myRigidbody.linearVelocityX = 0;
-        //    }
-        //}
     }
     private void JumpHandling() 
     {
@@ -173,8 +153,6 @@ public class MovementScript : MonoBehaviour
         {
             myRigidbody.linearVelocityY = 0;
             myRigidbody.linearVelocityY += jumpForce;
-            // VILMER :O
-            //onGround = false;
             jumping = true;
         }
         if (jumping)
