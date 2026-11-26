@@ -31,6 +31,7 @@ public class MovementScript : MonoBehaviour
     [SerializeField] float wallJumpForceX = 6;
     [SerializeField] float wallJumpForceY = 6;
     [SerializeField] bool leaveLeftWall, leaveRightWall;
+    bool pressWalljump;
 
     private void Awake()
     {
@@ -62,8 +63,6 @@ public class MovementScript : MonoBehaviour
         onRightWall = myRigidbody.IsTouching(contactFilters[2]);
         if (myRigidbody.IsTouching(contactFilters[3]))
         {
-            jumping = false;
-            jumpTime = 0;
         }
         if (onLeftWall)
         {
@@ -165,9 +164,10 @@ public class MovementScript : MonoBehaviour
     }
     private void JumpHandling() 
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && onGround)
+        if (Keyboard.current.spaceKey.isPressed && onGround && !jumping)
         {
             myRigidbody.linearVelocityY = jumpForce;
+            jumpTime = 0;
             jumping = true;
         }
         if (jumping)
@@ -177,37 +177,35 @@ public class MovementScript : MonoBehaviour
         if (Keyboard.current.spaceKey.wasReleasedThisFrame && jumping)
         {
             jumping = false;
-            myRigidbody.linearVelocityY -= jumpForce - jumpTime * myRigidbody.gravityScale * (9.81f / jumpReduceMulti);
-            jumpTime = 0;
-        }
-        if ((jumpReduceMulti > 1 || jumpReduceBase != 0) && myRigidbody.linearVelocityY <= 0)
-        {
-            jumping = false;
-            jumpTime = 0;
-        }
-        if (jumpForce - jumpTime * myRigidbody.gravityScale * (9.81f / jumpReduceMulti) <= 0)
-        {
-            jumping = false;
-            jumpTime = 0;
+            if (jumpForce - jumpTime * myRigidbody.gravityScale * (9.81f / jumpReduceMulti) >= 0)
+            {
+                myRigidbody.linearVelocityY -= jumpForce - jumpTime * myRigidbody.gravityScale * (9.81f / jumpReduceMulti);
+            }
         }
     }
 
     private void WallJump()
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && !onGround)
+        if (Keyboard.current.spaceKey.isPressed && !onGround && !pressWalljump && !jumping)
         {
             if (onLeftWall)
             {
                 myRigidbody.linearVelocityY = wallJumpForceY;
                 myRigidbody.linearVelocityX = wallJumpForceX;
                 leaveLeftWall = true;
+                pressWalljump = true;
             }
             if (onRightWall)
             {
                 myRigidbody.linearVelocityY = wallJumpForceY;
                 myRigidbody.linearVelocityX = -wallJumpForceX;
                 leaveRightWall = true;
+                pressWalljump = true;
             }
+        }
+        if (Keyboard.current.spaceKey.wasReleasedThisFrame)
+        {
+            pressWalljump = false;
         }
     }
 }
