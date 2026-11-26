@@ -42,7 +42,7 @@ public class RhythmPlatform : MonoBehaviour
         }
         BPM = gameManager.BPM;
         realFrequency = 60 * Beat / BPM;
-        timer -= startOffset / BPM;
+        timer -= startOffset;
     }
 
     void Update()

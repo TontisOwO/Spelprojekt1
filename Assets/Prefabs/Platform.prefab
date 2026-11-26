@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5268685340322992250}
   - component: {fileID: 7777830648441295360}
   m_Layer: 3
-  m_Name: Non-rhythmplatform
+  m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
