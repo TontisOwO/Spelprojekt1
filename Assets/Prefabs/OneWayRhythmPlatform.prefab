@@ -183,6 +183,7 @@ MonoBehaviour:
   beatsOn: 1
   beatsOff: 1
   startOff: 0
+  oneWay: 1
 --- !u!61 &1455283330629868238
 BoxCollider2D:
   m_ObjectHideFlags: 0
