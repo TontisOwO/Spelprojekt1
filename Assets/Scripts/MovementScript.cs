@@ -121,19 +121,19 @@ public class MovementScript : MonoBehaviour
                 myRigidbody.linearVelocityX = movementSpeedMax;
             }
         }
-        // VILMER :D
-        //if (myRigidbody.linearVelocityX < 0)
-        //{
-        //    chargeJump.eyes.transform.position = new Vector2(transform.position.x - 0.4f, transform.position.y);
-        //}
-        //else if (myRigidbody.linearVelocityX > 0)
-        //{
-        //    chargeJump.eyes.transform.position = new Vector2(transform.position.x + 0.4f, transform.position.y);
-        //}
-        //else
-        //{
-        //    chargeJump.eyes.transform.position = transform.position;
-        //}
+    VILMER: D
+        if (myRigidbody.linearVelocityX < 0)
+        {
+            chargeJump.eyes.transform.position = new Vector2(transform.position.x - 0.4f, transform.position.y);
+        }
+        else if (myRigidbody.linearVelocityX > 0)
+        {
+            chargeJump.eyes.transform.position = new Vector2(transform.position.x + 0.4f, transform.position.y);
+        }
+        else
+        {
+            chargeJump.eyes.transform.position = transform.position;
+        }
         if (onGround && (Keyboard.current.aKey.isPressed == Keyboard.current.dKey.isPressed))
         {
             if (myRigidbody.linearVelocityX > 0 + movementDeceleration * Time.deltaTime)
