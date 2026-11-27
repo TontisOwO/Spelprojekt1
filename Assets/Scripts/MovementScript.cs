@@ -15,14 +15,17 @@ public class MovementScript : MonoBehaviour
 
     [Header("Movement")]
 
+    InputAction moveAction = InputSystem.actions.FindAction("Move");
+
     public bool canMove;
 
     [SerializeField] private float movementSpeed = 20, movementSpeedMax = 5, movementDeceleration = 40;
 
     [Header("Jumping")]
 
-    [SerializeField] float jumpForce;
-    [SerializeField] float jumpReduceMulti, jumpReduceBase;
+    InputAction jumpAction = InputSystem.actions.FindAction("Jump");
+
+    [SerializeField] float jumpForce, jumpReduceMulti, jumpReduceBase;
     float jumpTime;
     bool jumping;
 
@@ -32,6 +35,9 @@ public class MovementScript : MonoBehaviour
     [SerializeField] float wallJumpForceY = 6;
     [SerializeField] bool leaveLeftWall, leaveRightWall;
     bool pressWalljump;
+
+    [Header("ChargeJump")]
+    InputAction chargeJumpAction = InputSystem.actions.FindAction("ChargeJump");
 
     private void Awake()
     {
@@ -107,7 +113,9 @@ public class MovementScript : MonoBehaviour
 
     private void WASDHandling()
     {
-        if (Keyboard.current.aKey.isPressed && !Keyboard.current.dKey.isPressed)
+        Vector2 moveVector = moveAction.ReadValue<Vector2>();
+
+        if (moveVector.x < 0)
         {
             if (myRigidbody.linearVelocityX >= -movementSpeedMax)
             {
@@ -121,8 +129,8 @@ public class MovementScript : MonoBehaviour
             }
         }
 
-        if (Keyboard.current.dKey.isPressed && !Keyboard.current.aKey.isPressed)
-        {
+        if (moveVector.x > 0)
+            {
             if (myRigidbody.linearVelocityX <= movementSpeedMax)
             {
                 myRigidbody.linearVelocityX += movementSpeed * Time.deltaTime;
@@ -147,7 +155,7 @@ public class MovementScript : MonoBehaviour
         {
             chargeJump.eyes.transform.position = transform.position;
         }
-        if (onGround && (Keyboard.current.aKey.isPressed == Keyboard.current.dKey.isPressed))
+        if (onGround && moveVector.x == 0)
         {
             if (myRigidbody.linearVelocityX > 0 + movementDeceleration * Time.deltaTime)
             {
@@ -165,7 +173,9 @@ public class MovementScript : MonoBehaviour
     }
     private void JumpHandling() 
     {
-        if (Keyboard.current.spaceKey.isPressed && onGround && !jumping && !Keyboard.current.leftShiftKey.isPressed)
+        bool jumpValue = jumpAction.IsPressed();
+        bool chargeJumpValue = chargeJumpAction.IsPressed();
+        if (jumpValue && onGround && !jumping && !chargeJumpValue)
         {
             Debug.Log("jump");
             myRigidbody.linearVelocityY = jumpForce;
@@ -175,11 +185,12 @@ public class MovementScript : MonoBehaviour
     }
     private void JumpHandlingP2()
     {
+        bool jumpValue = jumpAction.IsPressed();
         if (jumping)
         {
             jumpTime += Time.deltaTime;
         }
-        if (Keyboard.current.spaceKey.wasReleasedThisFrame && jumping)
+        if (!jumpValue && jumping)
         {
             jumping = false;
             if (jumpForce - jumpTime * myRigidbody.gravityScale * (9.81f / jumpReduceMulti) >= 0)
