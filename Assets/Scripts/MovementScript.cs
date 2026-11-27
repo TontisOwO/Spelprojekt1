@@ -95,10 +95,7 @@ public class MovementScript : MonoBehaviour
             }
         }
         //
-        if (jumping)
-        {
-            jumpTime += Time.deltaTime;
-        }
+        JumpHandlingP2();
     }
 
     private void MovementHandling()
@@ -168,13 +165,20 @@ public class MovementScript : MonoBehaviour
     }
     private void JumpHandling() 
     {
-        if (Keyboard.current.spaceKey.isPressed && onGround && !jumping)
+        if (Keyboard.current.spaceKey.isPressed && onGround && !jumping && !Keyboard.current.leftShiftKey.isPressed)
         {
+            Debug.Log("jump");
             myRigidbody.linearVelocityY = jumpForce;
             jumpTime = 0;
             jumping = true;
         }
-        
+    }
+    private void JumpHandlingP2()
+    {
+        if (jumping)
+        {
+            jumpTime += Time.deltaTime;
+        }
         if (Keyboard.current.spaceKey.wasReleasedThisFrame && jumping)
         {
             jumping = false;
