@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class MovementScript : MonoBehaviour
 {
+    float value;
     Rigidbody2D myRigidbody;
     // VILMER :S
     ChargeJump chargeJump;

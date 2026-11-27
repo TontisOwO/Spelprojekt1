@@ -10,8 +10,9 @@ public class ChargeJump : MonoBehaviour
     [SerializeField] private Slider slider;
     [SerializeField] private Rigidbody2D myRigidbody;
     [SerializeField] private float chargeJumpForce = 50;
+    float sliderIncrement;
 
-    private float sliderIncrement;
+    private float BeatLength;
     private int facing;
 
     //Remove when proper sprites are implemented
@@ -20,7 +21,7 @@ public class ChargeJump : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        sliderIncrement = (60 / gameManager.BPM) * Time.fixedDeltaTime;
+        BeatLength = 60 / gameManager.BPM;
     }
 
     // Update is called once per frame
@@ -41,7 +42,7 @@ public class ChargeJump : MonoBehaviour
         {
             slider.gameObject.SetActive(true);
             movementScript.canMove = false;
-            slider.value += sliderIncrement;
+            slider.value += Time.deltaTime / BeatLength;
             if (Keyboard.current.aKey.isPressed && !Keyboard.current.dKey.isPressed)
             {
                 facing = -1;
