@@ -116,9 +116,8 @@ public class MovementScript : MonoBehaviour
 
     private void WASDHandling()
     {
-        Vector2 moveVector = moveAction.ReadValue<Vector2>();
 
-        if (moveVector.x < 0)
+        if (moveAction.ReadValue<Vector2>().x < 0)
         {
             if (myRigidbody.linearVelocityX >= -movementSpeedMax)
             {
@@ -132,7 +131,7 @@ public class MovementScript : MonoBehaviour
             }
         }
 
-        if (moveVector.x > 0)
+        if (moveAction.ReadValue<Vector2>().x > 0)
             {
             if (myRigidbody.linearVelocityX <= movementSpeedMax)
             {
@@ -158,7 +157,7 @@ public class MovementScript : MonoBehaviour
         {
             chargeJump.eyes.transform.position = transform.position;
         }
-        if (onGround && moveVector.x == 0)
+        if (onGround && moveAction.ReadValue<Vector2>().x == 0)
         {
             if (myRigidbody.linearVelocityX > 0 + movementDeceleration * Time.deltaTime)
             {
@@ -176,9 +175,7 @@ public class MovementScript : MonoBehaviour
     }
     private void JumpHandling() 
     {
-        bool jumpValue = jumpAction.IsPressed();
-        bool chargeJumpValue = chargeJumpAction.IsPressed();
-        if (jumpValue && onGround && !jumping && !chargeJumpValue)
+        if (jumpAction.IsPressed() && onGround && !jumping && !chargeJumpAction.IsPressed())
         {
             myRigidbody.linearVelocityY = jumpForce;
             jumpTime = 0;
@@ -187,12 +184,11 @@ public class MovementScript : MonoBehaviour
     }
     private void JumpHandlingP2()
     {
-        bool jumpValue = jumpAction.IsPressed();
         if (jumping)
         {
             jumpTime += Time.deltaTime;
         }
-        if (!jumpValue && jumping)
+        if (!jumpAction.IsPressed() && jumping)
         {
             jumping = false;
             if (jumpForce - jumpTime * myRigidbody.gravityScale * (9.81f / jumpReduceMulti) >= 0)
