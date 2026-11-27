@@ -77,6 +77,10 @@ public class MovementScript : MonoBehaviour
         {
             MovementHandling();
         }
+        if (jumping)
+        {
+            jumpTime += Time.deltaTime;
+        }
         // VILMER :U
         // This is mostly a copy of the deceleration code, but I didn't want to mess with your script too much so I'll leave making it into a proper function to you.
         else if (onGround)
@@ -170,10 +174,7 @@ public class MovementScript : MonoBehaviour
             jumpTime = 0;
             jumping = true;
         }
-        if (jumping)
-        {
-            jumpTime += Time.deltaTime;
-        }
+        
         if (Keyboard.current.spaceKey.wasReleasedThisFrame && jumping)
         {
             jumping = false;
