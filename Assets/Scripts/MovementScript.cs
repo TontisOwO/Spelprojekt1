@@ -15,7 +15,7 @@ public class MovementScript : MonoBehaviour
 
     [Header("Movement")]
 
-    InputAction moveAction = InputSystem.actions.FindAction("Move");
+    InputAction moveAction;
 
     public bool canMove;
 
@@ -23,7 +23,7 @@ public class MovementScript : MonoBehaviour
 
     [Header("Jumping")]
 
-    InputAction jumpAction = InputSystem.actions.FindAction("Jump");
+    InputAction jumpAction;
 
     [SerializeField] float jumpForce, jumpReduceMulti, jumpReduceBase;
     float jumpTime;
@@ -37,7 +37,7 @@ public class MovementScript : MonoBehaviour
     bool pressWalljump;
 
     [Header("ChargeJump")]
-    InputAction chargeJumpAction = InputSystem.actions.FindAction("ChargeJump");
+    InputAction chargeJumpAction;
 
     private void Awake()
     {
@@ -51,6 +51,9 @@ public class MovementScript : MonoBehaviour
         // VILMER :}
         chargeJump = GetComponent<ChargeJump>();
         //
+        moveAction = InputSystem.actions.FindAction("Move");
+        jumpAction = InputSystem.actions.FindAction("Jump");
+        chargeJumpAction = InputSystem.actions.FindAction("ChargeJump");
     }
 
     void Update()
@@ -177,7 +180,6 @@ public class MovementScript : MonoBehaviour
         bool chargeJumpValue = chargeJumpAction.IsPressed();
         if (jumpValue && onGround && !jumping && !chargeJumpValue)
         {
-            Debug.Log("jump");
             myRigidbody.linearVelocityY = jumpForce;
             jumpTime = 0;
             jumping = true;
